@@ -1,3 +1,4 @@
+package ForbiddenIsland;
 import java.awt.*;
 import javax.swing.*;
 

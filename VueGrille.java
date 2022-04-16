@@ -1,5 +1,8 @@
+package ForbiddenIsland;
+import java.util.*;
 import java.awt.*;
 import javax.swing.*;
+import java.util.List;
 
 class VueGrille extends JPanel implements Observer {
 
@@ -12,7 +15,7 @@ class VueGrille extends JPanel implements Observer {
 
         modele.addObserver(this);
 
-        Dimension dim = new Dimension(TAILLE * CModele.HAUTEUR, TAILLE * CModele.HAUTEUR);
+        Dimension dim = new Dimension(TAILLE * Island.HAUTEUR, TAILLE * Island.HAUTEUR);
         this.setPreferredSize(dim);
     }
 
@@ -23,14 +26,14 @@ class VueGrille extends JPanel implements Observer {
     public void paintComponent(Graphics g) {
         super.repaint();
 
-        for (int i = 1; i <= CModele.HAUTEUR; i++) {
-            for (int j = 1; j <= CModele.HAUTEUR; j++) {
+        for (int i = 1; i <= Island.HAUTEUR; i++) {
+            for (int j = 1; j <= Island.HAUTEUR; j++) {
                 paint(g, modele.getZone(i, j), modele.getPlayer(i, j), (i - 1) * TAILLE, (j - 1) * TAILLE);
             }
         }
     }
 
-    private void paint(Graphics g, Zone z, int PlayerId, int x, int y) {
+    private void paint(Graphics g, Zone z, List<Player> players, int x, int y) {
 
         if (z.isSubmerged())
             g.setColor(Color.CYAN);
@@ -41,11 +44,25 @@ class VueGrille extends JPanel implements Observer {
 
         g.fillRect(x, y, TAILLE, TAILLE);
 
-        switch (PlayerId) {
-            case 0:
-                g.setColor(Color.YELLOW);
-
+        if (!players.isEmpty()) {
+            switch (players.get(0).id) {
+                case 0:
+                    g.setColor(Color.YELLOW);
+                    g.fillOval(x, y, TAILLE, TAILLE);
+                    break;
+                case 1:
+                    g.setColor(Color.RED);
+                    g.fillOval(x, y, TAILLE, TAILLE);
+                    break;
+                case 2:
+                    g.setColor(Color.ORANGE);
+                    g.fillOval(x, y, TAILLE, TAILLE);
+                    break;
+                case 3:
+                    g.setColor(Color.GREEN);
+                    g.fillOval(x, y, TAILLE, TAILLE);
+                    break;
+            }
         }
-        g.fillOval(x, y, TAILLE, TAILLE);
     }
 }

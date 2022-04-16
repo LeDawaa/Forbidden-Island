@@ -1,3 +1,4 @@
+package ForbiddenIsland;
 import java.awt.*;
 
 enum WaterStage {

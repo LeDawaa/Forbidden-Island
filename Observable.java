@@ -1,3 +1,4 @@
+package ForbiddenIsland;
 import java.util.*;
 
 abstract class Observable {
