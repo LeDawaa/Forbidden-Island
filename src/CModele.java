@@ -43,30 +43,36 @@ class CModele extends Observable {
         return island.getZone(x, y).getPlayer();
     }
 
+    public Player getCurrentPlayer() {
+        return Players[currentPlayer];
+    }
+
     public boolean movePlayer(int id, Direction direction) {
         Zone z = Players[id].z;
         switch (direction) {
             case UP:
-                if (z.y - 1 >= 1) {
-                    Players[id].movePlayer(getZone(z.x, z.y - 1));
-                    return true;
-                } break;
+                if (z.y - 1 >= 1)
+                    return Players[id].movePlayer(getZone(z.x, z.y - 1));
+                break;
             case DOWN:
-                if (z.y + 1 <= Island.HAUTEUR) {
-                    Players[id].movePlayer(getZone(z.x, z.y + 1));
-                    return true;
-                } break;
+                if (z.y + 1 <= Island.HAUTEUR)
+                    return Players[id].movePlayer(getZone(z.x, z.y + 1));
+                break;
             case RIGHT:
-                if (z.x + 1 <= Island.HAUTEUR) {
-                    Players[id].movePlayer(getZone(z.x + 1, z.y));
-                    return true;
-                } break;
+                if (z.x + 1 <= Island.HAUTEUR)
+                    return Players[id].movePlayer(getZone(z.x + 1, z.y));
+                break;
             case LEFT:
-                if (z.x - 1 >= 1) {
-                    Players[id].movePlayer(getZone(z.x - 1, z.y));
-                    return true;
-                } break;
+                if (z.x - 1 >= 1)
+                    return Players[id].movePlayer(getZone(z.x - 1, z.y));
+                break;
+            case STAY:
+                break;
         }
         return false;
+    }
+
+    public boolean dryZone(Direction direction) {
+        return island.dryZone(Players[currentPlayer].z, direction);
     }
 }

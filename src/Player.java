@@ -7,9 +7,10 @@ class Player {
         this.z = z;
     }
 
-    public void movePlayer(Zone z) {
+    public boolean movePlayer(Zone z) {
         this.z.removePlayer(this);
         this.z = z;
         this.z.placePlayer(this);
+        return true;
     }
 }

@@ -25,6 +25,18 @@ class Zone {
         }
     }
 
+    public boolean dryZone() {
+        switch (etat) {
+            case SUBMERGED:
+                etat = WaterStage.DRY;
+                return true;
+            case FLOODED:
+                break;
+            case DRY:
+                break;
+        } return false;
+    }
+
     public boolean isFlooded() {
         return etat.equals(WaterStage.FLOODED);
     }

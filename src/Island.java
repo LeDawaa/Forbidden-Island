@@ -6,7 +6,7 @@ public class Island {
 
     protected Zone[][] Zones = new Zone[HAUTEUR + 2][HAUTEUR + 2];;
 
-    public Island () {
+    public Island() {
         for (int i = 0; i < HAUTEUR + 2; i++) {
             for (int j = 0; j < HAUTEUR + 2; j++) {
                 Zones[i][j] = new Zone(i, j);
@@ -14,7 +14,7 @@ public class Island {
         }
     }
 
-    public void flooding () {
+    public void flooding() {
         List<int[]> dryLands = new ArrayList<int[]>();
         List<int[]> submergedLands = new ArrayList<int[]>();
 
@@ -46,5 +46,29 @@ public class Island {
 
     public void placePlayer(int x, int y, Player player) {
         Zones[x][y].placePlayer(player);
+    }
+
+    public boolean dryZone(Zone z, Direction direction) {
+        switch (direction) {
+            case UP:
+                if (z.y - 1 >= 1)
+                    return getZone(z.x, z.y - 1).dryZone();
+                break;
+            case DOWN:
+                if (z.y + 1 <= Island.HAUTEUR)
+                    return getZone(z.x, z.y + 1).dryZone();
+                break;
+            case RIGHT:
+                if (z.x + 1 <= Island.HAUTEUR)
+                    return getZone(z.x + 1, z.y).dryZone();
+                break;
+            case LEFT:
+                if (z.x - 1 >= 1)
+                    return getZone(z.x - 1, z.y).dryZone();
+                break;
+            case STAY:
+                return z.dryZone();
+        }
+        return false;
     }
 }

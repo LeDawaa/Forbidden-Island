@@ -5,7 +5,7 @@ enum WaterStage {
 };
 
 enum Direction {
-    UP, DOWN, LEFT, RIGHT
+    UP, DOWN, STAY, LEFT, RIGHT
 };
 
 public class Project {
