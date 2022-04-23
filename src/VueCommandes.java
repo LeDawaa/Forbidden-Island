@@ -1,9 +1,6 @@
 import java.util.*;
 import java.util.List;
-
 import javax.swing.*;
-
-import java.awt.Component;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
@@ -11,10 +8,16 @@ class VueCommandes extends JPanel {
 
     private CModele modele;
 
-    List<JLabel> labels = new ArrayList<JLabel>();
+    static List<JLabel> labels = new ArrayList<JLabel>();
+
+    static JPanel movementButtons = new JPanel();
+
+    static JPanel dryButtons = new JPanel();
 
     public VueCommandes(CModele modele) {
         this.modele = modele;
+
+        Controleur ctrl = new Controleur(modele);
 
         JPanel pannel = new JPanel();
         pannel.setLayout(new GridLayout(3, 1));
@@ -42,53 +45,31 @@ class VueCommandes extends JPanel {
 
         ////////////////////////////////////////////////////////////////
 
-        JPanel movementButtons = new JPanel();
         movementButtons.setLayout(new GridLayout(3, 3));
 
-        String[] keyMovement = { " ", "↑", " ", "←", "EOT", "→", " ", "↓", " " };
+        String[] keyMovement = { "↖", "↑", "↗", "←", "EOT", "→", "↙", "↓", "↘" };
         for (int i = 0; i < keyMovement.length; i++) {
             JButton button = new JButton(keyMovement[i]);
-            if (keyMovement[i] == " ")
-                button.setVisible(false);
+            if ("↖↗↙↘".contains(keyMovement[i]))
+                button.setEnabled(false);
             movementButtons.add(button);
+            button.addActionListener(ctrl);
         }
         pannel.add(movementButtons);
 
         ////////////////////////////////////////////////////////////////
-
-        JPanel dryButtons = new JPanel();
+        
         dryButtons.setLayout(new GridLayout(3, 3));
 
-        String[] keyDry = { " ", "DRY UP", " ", "DRY LEFT", "DRY HERE", "DRY RIGHT", " ", "DRY DOWN", " " };
+        String[] keyDry = { "T A", "DRY UP", " ", "DRY LEFT", "DRY HERE", "DRY RIGHT", " ", "DRY DOWN", " " };
         for (int i = 0; i < keyDry.length; i++) {
             JButton button = new JButton(keyDry[i]);
             if (keyDry[i] == " ")
                 button.setVisible(false);
             dryButtons.add(button);
+            button.addActionListener(ctrl);
         }
         pannel.add(dryButtons);
-
-        ////////////////////////////////////////////////////////////////
-
-        Controleur ctrl = new Controleur(modele, labels, dryButtons);
-
-        ////////////////////////////////////////////////////////////////
-
-        List<Component> buttonsList = Arrays.asList(movementButtons.getComponents());
-
-        for (int i = 0; i < buttonsList.size(); i++) {
-            if (buttonsList.get(i) instanceof JButton) {
-                ((JButton) buttonsList.get(i)).addActionListener(ctrl);
-            }
-        }
-
-        buttonsList = Arrays.asList(dryButtons.getComponents());
-
-        for (int i = 0; i < buttonsList.size(); i++) {
-            if (buttonsList.get(i) instanceof JButton) {
-                ((JButton) buttonsList.get(i)).addActionListener(ctrl);
-            }
-        }
 
         ////////////////////////////////////////////////////////////////
 
