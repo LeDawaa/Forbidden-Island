@@ -73,10 +73,13 @@ enum Artifacts {
     EarthArtifact("TERRE"), WaterArtifact("EAU"), FireArtifact("FEU"), WindArtifact("AIR");
 
     public BufferedImage texture;
+    public BufferedImage card_texture;
+
 
     private Artifacts(String Path) {
         try {
             this.texture = ImageIO.read(new File("res\\images\\tresors\\" + Path + ".png"));
+            this.card_texture = ImageIO.read(new File("res\\images\\cles\\" + Path + ".png"));
         } catch (IOException ie) {
             ie.printStackTrace();
         }

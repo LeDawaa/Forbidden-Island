@@ -35,6 +35,8 @@ class Zone {
             case FLOODED:
                 etat = WaterStage.SUBMERGED;
                 texture = WaterStage.SUBMERGED.texture;
+                if (c.equals(Case.FoolsLanding))
+                    CVue.gameOver();
                 break;
             case SUBMERGED:
                 break;

@@ -7,7 +7,7 @@ class CModele extends Observable {
 
     public static final int HAUTEUR = 6;
 
-    private Player[] Players = new Player[PLAYER_COUNT];
+    protected Player[] Players = new Player[PLAYER_COUNT];
 
     protected Zone[][] Zones = new Zone[HAUTEUR + 2][HAUTEUR + 2];;
 
@@ -60,13 +60,11 @@ class CModele extends Observable {
 
         for (int i = 1; i < HAUTEUR + 1; i++) {
             for (int j = 1; j < HAUTEUR + 1; j++) {
-                if (Zones[i][j].isDry()) {
-                    int[] coords = { i, j };
+                int[] coords = { i, j };
+                if (Zones[i][j].isDry())
                     dryLands.add(coords);
-                } else if (Zones[i][j].isFlooded()) {
-                    int[] coords = { i, j };
+                else if (Zones[i][j].isFlooded())
                     submergedLands.add(coords);
-                }
             }
         }
 
@@ -77,6 +75,15 @@ class CModele extends Observable {
         if (dryLands.size() > 0) {
             for (int i = 0; i < Math.min(dryLands.size(), 3); i++)
                 Zones[dryLands.get(i)[0]][dryLands.get(i)[1]].flood();
+        }
+
+        for (Player player : Players) {
+            Zone z = player.z;
+            if (!Zones[z.x][z.y - 1].isAccessible() &&
+                    !Zones[z.x][z.y + 1].isAccessible() &&
+                    !Zones[z.x - 1][z.y].isAccessible() &&
+                    !Zones[z.x + 1][z.y].isAccessible())
+                CVue.gameOver();
         }
     }
 

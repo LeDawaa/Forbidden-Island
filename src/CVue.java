@@ -5,34 +5,45 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 class CVue {
 
-    private JFrame frame;
+    static private JFrame frame = new JFrame();
+
+    {
+        frame.setTitle("Forbidden Island");
+    }
+
+    static private JPanel game = new JPanel();
+    static private JPanel win = new JPanel();
+    static private JPanel end = new JPanel();
 
     private VueGrille grille;
     private VueCommandes commandes;
-    BufferedImage img;
     
+    static BufferedImage img;
+    static BufferedImage lose;
+    static BufferedImage victory;
+
     {
         try {
             img = ImageIO.read(new File("res\\images\\background.png"));
-        } catch(IOException ie) {
+            lose = ImageIO.read(new File("res\\images\\GameOver.png"));
+            victory = ImageIO.read(new File("res\\images\\win.jpg"));
+        } catch (IOException ie) {
             ie.printStackTrace();
         }
     }
 
     public CVue(CModele modele) {
 
-        frame = new JFrame();
-        frame.setTitle("Forbidden Island");
+        game.setLayout(new BorderLayout());
+        JLabel background = new JLabel(new ImageIcon(img.getScaledInstance(1650, 720, Image.SCALE_DEFAULT)));
 
-        frame.setLayout(new BorderLayout());
-        JLabel background=new JLabel(new ImageIcon(img.getScaledInstance(1280, 720, Image.SCALE_DEFAULT)));
-
-        // Image newImage = yourImage.getScaledInstance(newWidth, newHeight, Image.SCALE_DEFAULT);
-
-        frame.add(background);
-
+        game.add(background);
 
         background.setLayout(new FlowLayout(FlowLayout.LEFT, 75, 75));
 
@@ -41,8 +52,60 @@ class CVue {
         commandes = new VueCommandes(modele);
         background.add(commandes);
 
+        frame.setContentPane(game);
+
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+
+    static void gameOver() {
+
+        frame.remove(game);
+
+        end.setLayout(new BorderLayout());
+        JLabel background = new JLabel(new ImageIcon(lose.getScaledInstance(1280, 720, Image.SCALE_DEFAULT)));
+
+        end.add(background);
+        
+        frame.setContentPane(end);
+
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        try {
+            String soundName = "res\\images\\YouDied.wav";
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ie) {
+        }
+    }
+
+    static void win() {
+
+        frame.remove(game);
+
+        win.setLayout(new BorderLayout());
+        JLabel background = new JLabel(new ImageIcon(victory.getScaledInstance(1280, 720, Image.SCALE_DEFAULT)));
+
+        win.add(background);
+        
+        frame.setContentPane(win);
+
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        try {
+            String soundName = "res\\images\\YouWin2.wav";
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ie) {
+        }
     }
 }
