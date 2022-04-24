@@ -32,3 +32,5 @@ Principalement la gestion de 3 projets en simultanés dans des languages différ
 ## Les morceaux de code écrits à plusieurs ou empruntés ailleurs.
 
 Y'en a pas.
+
+PS : Merci à Baptiste Samoyault pour l'aide sur le schéma UML et merci à Julien Le-Goff pour je sais pas trop quoi.
