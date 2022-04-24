@@ -66,7 +66,7 @@ class Controleur implements ActionListener {
             case "WIN":
                 CVue.win();
                 break;
-            case "T A":
+            case "<html>TAKE<br/>ARTIFACT<html/>":
                 if (actions >= 1 && modele.getCurrentPlayer().takeArtifact()) {
                     actions--;
                 }

@@ -101,7 +101,7 @@ class VueCommandes extends JPanel {
 
         dryButtons.setLayout(new GridLayout(3, 3));
 
-        String[] keyDry = { "T A", "DRY UP", "G O", "DRY LEFT", "DRY HERE", "DRY RIGHT", "WIN", "DRY DOWN", "TRADE" };
+        String[] keyDry = { "<html>TAKE<br/>ARTIFACT<html/>", "DRY UP", " ", "DRY LEFT", "DRY HERE", "DRY RIGHT", "WIN", "DRY DOWN", "LOOSE" };
         for (int i = 0; i < keyDry.length; i++) {
             JButton button = new JButton(keyDry[i]);
             if (keyDry[i] == " ")
