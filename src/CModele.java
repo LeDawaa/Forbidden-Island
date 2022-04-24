@@ -1,5 +1,9 @@
 import java.util.*;
 import java.util.List;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
 
 class CModele extends Observable {
 
@@ -75,6 +79,15 @@ class CModele extends Observable {
         if (dryLands.size() > 0) {
             for (int i = 0; i < Math.min(dryLands.size(), 3); i++)
                 Zones[dryLands.get(i)[0]][dryLands.get(i)[1]].flood();
+            try {
+                String soundName = "res\\images\\Water Splash-Fishing Sound (Minecraft Sound) - Sound Effect for editing-YoutubeConvert.cc.wav";
+                AudioInputStream audioInputStream = AudioSystem
+                        .getAudioInputStream(new File(soundName).getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (Exception ie) {
+            }
         }
 
         for (Player player : Players) {

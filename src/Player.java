@@ -2,6 +2,10 @@ import java.util.*;
 import java.util.List;
 import javax.swing.*;
 import java.awt.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
 
 class Player {
     int id;
@@ -43,8 +47,15 @@ class Player {
                 case WaterArtifact -> VueCommandes.WaterWilder.setIcon(new ImageIcon(this.pawn.texture.getScaledInstance(50, 73, Image.SCALE_DEFAULT)));
             }
 
-
-
+            try {
+                String soundName = "res\\images\\Minecraft Chest (Open and Close) - Sound Effect (HD)-YoutubeConvert.cc.wav";
+                AudioInputStream audioInputStream = AudioSystem
+                        .getAudioInputStream(new File(soundName).getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (Exception ie) {
+            }
 
             keys.put(key, keys.get(key) - 1);
             this.z.artifact = null;
