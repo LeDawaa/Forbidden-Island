@@ -1,18 +1,34 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Ce projet est inspiré du jeu de plateau `L'île interdite`.
 
-## Folder Structure
+Il s'agit d'un projet de L2 fait entièrement en Java en suivant un modèle MVC.
 
-The workspace contains two folders by default, where:
+Les textures proviennent de ce [projet](https://github.com/djdhm/ForbiddenIsland).
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Parties traitées
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+Les points qui ont été traités sont:
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+- Gestions des Zones (niveau d'eau, présence d'artefact)
+- Joueurs (déplacement et assèchement dans les zones adjacentes)
+- Gestion des artefacts et des clefs
+- Échanges de clefs
+- Actions spéciales
+- Et bien sûr de magnifiques graphismes et effets spéciaux
 
-## Dependency Management
+## Choix d’architecture
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Étant en solo, j'ai tout fait tout seul, avec la coopération de Google.
+
+Pour ce qui est du choix d'architecture, je me suis orienté vers un modèle MVC en considérant que c'était ce qui était demandé.
+
+La séparation des fichiers se fait par rapport à la classe avec principalement une classe par fichier.
+
+## Problèmes qui sont présents et que je n’ai pas pu éliminer
+
+Principalement la gestion de 3 projets en simultanés dans des languages différents.
+
+## Les morceaux de code écrits à plusieurs ou empruntés ailleurs.
+
+Y'en a pas.

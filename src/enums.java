@@ -105,6 +105,4 @@ enum Direction {
     UP, DOWN, STAY, LEFT, RIGHT
 };
 
-enum Items {
-    SandBag
-};
+;
