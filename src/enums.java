@@ -59,7 +59,7 @@ enum Pawns {
             ie.printStackTrace();
         }
     }
-}
+};
 
 enum Keys {
     EarthKey, WaterKey, FireKey, WindKey;
@@ -104,5 +104,3 @@ enum Artifacts {
 enum Direction {
     UP, DOWN, STAY, LEFT, RIGHT
 };
-
-;

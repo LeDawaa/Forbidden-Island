@@ -60,7 +60,7 @@ class Controleur implements ActionListener {
                     }
                 }
                 break;
-            case "G O":
+            case "LOOSE":
                 CVue.gameOver();
                 break;
             case "WIN":
